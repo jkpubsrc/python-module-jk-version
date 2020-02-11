@@ -1,0 +1,53 @@
+{
+	"language": "python3",
+	"name": "jk_version",
+	"version": "0.2020.2.11",
+	"meta": {
+		"description": "This python module provides a version class. Instances of this class may be used in representing and version numbers and compare them.",
+		"keywords": [
+			"version",
+			"versioning"
+		],
+		"license": "Apache 2.0",
+		"development_status": "alpha",
+		"authors": [
+			{
+				"name": "Jürgen Knauth",
+				"email": "pubsrc@binary-overflow.de"
+			}
+		],
+		"wiki": {
+			"page": "DevDocs:jk_version"
+		}
+	},
+	"repositories": [
+		{
+			"type": "github",
+			"user": "jkpubsrc",
+			"project": "python-module-jk-version",
+			"devon_publish": true
+		},
+		{
+			"type": "pypy",
+			"project": "jk_version",
+			"devon_publish": true
+		}
+	],
+	"source": {
+		"packages": [
+			"jk_version"
+		],
+		"extra_data_files": [
+		],
+		"extra_binary_files": [
+		]
+	},
+	"requirements": {
+		"python_packages": [
+		],
+		"python_packages_dev": [
+			"jk_testing"
+		]
+	}
+}
+
