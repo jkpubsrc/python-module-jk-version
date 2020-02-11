@@ -4,7 +4,7 @@
 Introduction
 ------------
 
-This python module ...
+This python module provides a version class. Instances of this class may be used in representing and version numbers and compare them.
 
 Information about this module can be found here:
 
@@ -32,7 +32,41 @@ Please include this module into your application using the following code:
 import jk_version
 ```
 
-...
+### Parse a version number
+
+Version numbers can either be specified as lists of integers or as a string. Examples:
+
+* `Version([ 1, 7, 51 ])`
+* `Version(( 1, 7, 51 ))`
+* `Version("1.7.51")`
+
+### Version numbering schema
+
+For compatibility reasons the version number parser is designed to accept the following schema:
+
+*[ epoch ":" ] version_data*
+
+Where *epoch* is optional and - if present - must be an integer, and *version_data* is a regular version string consisting of decimal numbers separated by full stops.
+
+Examples for valid version numbers:
+
+* `0`
+* `0.1`
+* `0.1.2`
+* `2020.12.24`
+* `2:0.1.2`
+
+### Comparing version numbers
+
+Version numbers can be compared. Example:
+
+```python
+v1 = Version("0.1.2")
+v2 = Version("0.2.0")
+print(v2 > v1)
+```
+
+This will print: `True`
 
 Contact Information
 -------------------
