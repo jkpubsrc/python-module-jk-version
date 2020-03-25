@@ -3,6 +3,7 @@
 
 import typing
 import re
+import datetime
 
 
 
@@ -165,6 +166,18 @@ class Version(object):
 	def __ne__(self, other):
 		n = self.compareTo(other)
 		return n != 0
+	#
+
+	@staticmethod
+	def now():
+		dt = datetime.datetime.now()
+		return Version([ 0, dt.year, dt.month, dt.day ])
+	#
+
+	@staticmethod
+	def fromTimeStamp(t):
+		dt = datetime.datetime.fromtimestamp(t)
+		return Version([ 0, dt.year, dt.month, dt.day ])
 	#
 
 #

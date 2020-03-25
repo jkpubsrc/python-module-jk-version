@@ -1,7 +1,7 @@
 {
 	"language": "python3",
 	"name": "jk_version",
-	"version": "0.2020.2.11",
+	"version": "0.2020.3.25",
 	"meta": {
 		"description": "This python module provides a version class. Instances of this class may be used in representing and version numbers and compare them.",
 		"keywords": [
@@ -9,7 +9,7 @@
 			"versioning"
 		],
 		"license": "Apache 2.0",
-		"development_status": "alpha",
+		"development_status": "stable",
 		"authors": [
 			{
 				"name": "Jürgen Knauth",

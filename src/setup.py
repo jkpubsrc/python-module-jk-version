@@ -19,11 +19,11 @@ setup(
 	author = "Jürgen Knauth",
 	author_email = "pubsrc@binary-overflow.de",
 	classifiers = [
-		"Development Status :: 3 - Alpha",
+		"Development Status :: 5 - Production/Stable",
 		"License :: OSI Approved :: Apache Software License",
 	],
 	description = "This python module provides a version class. Instances of this class may be used in representing and version numbers and compare them.",
-	download_url = "https://github.com/jkpubsrc/python-module-jk-version/tarball/0.2020.2.11",
+	download_url = "https://github.com/jkpubsrc/python-module-jk-version/tarball/0.2020.3.25",
 	include_package_data = False,
 	install_requires = [
 	],
@@ -37,7 +37,7 @@ setup(
 		"jk_version",
 	],
 	url = "https://github.com/jkpubsrc/python-module-jk-version",
-	version = "0.2020.2.11",
+	version = "0.2020.3.25",
 	zip_safe = False,
 	long_description = readme(),
 	long_description_content_type="text/markdown",
