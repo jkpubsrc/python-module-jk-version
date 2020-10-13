@@ -1,53 +1,53 @@
 {
-	"language": "python3",
-	"name": "jk_version",
-	"version": "0.2020.3.25",
+	"documentation": [],
+	"magic": {
+		"magic": "packageinfo",
+		"version": 2
+	},
 	"meta": {
+		"authors": [
+			{
+				"email": "pubsrc@binary-overflow.de",
+				"name": "J\u00fcrgen Knauth"
+			}
+		],
 		"description": "This python module provides a version class. Instances of this class may be used in representing and version numbers and compare them.",
+		"development_status": "stable",
 		"keywords": [
 			"version",
 			"versioning"
 		],
-		"license": "Apache 2.0",
-		"development_status": "stable",
-		"authors": [
-			{
-				"name": "Jürgen Knauth",
-				"email": "pubsrc@binary-overflow.de"
-			}
-		],
-		"wiki": {
-			"page": "DevDocs:jk_version"
-		}
+		"language": "python3",
+		"license": "Apache2",
+		"name": "jk_version",
+		"packageClass": "python-module",
+		"version": "0.2020.10.13"
 	},
 	"repositories": [
 		{
-			"type": "github",
-			"user": "jkpubsrc",
+			"devon_publish": true,
 			"project": "python-module-jk-version",
-			"devon_publish": true
+			"type": "github",
+			"user": "jkpubsrc"
 		},
 		{
-			"type": "pypy",
+			"devon_publish": true,
 			"project": "jk_version",
-			"devon_publish": true
+			"type": "pypi"
 		}
 	],
-	"source": {
-		"packages": [
-			"jk_version"
-		],
-		"extra_data_files": [
-		],
-		"extra_binary_files": [
-		]
-	},
 	"requirements": {
-		"python_packages": [
-		],
+		"python_packages": [],
 		"python_packages_dev": [
 			"jk_testing"
+		],
+		"system_apt_packages": []
+	},
+	"source": {
+		"extra_binary_files": [],
+		"extra_data_files": [],
+		"packages": [
+			"jk_version"
 		]
 	}
 }
-

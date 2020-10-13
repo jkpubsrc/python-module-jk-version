@@ -76,6 +76,34 @@ class Version(object):
 			raise Exception("Value of invalid type specified: " + str(type(version)))
 	#
 
+	@property
+	def length(self) -> int:
+		return len(self.__numbers)
+	#
+
+	@property
+	def numbers(self) -> list:
+		return list(self.__numbers)
+	#
+
+	@property
+	def isDateBase(self) -> bool:
+		if len(self.__numbers) < 4:
+			return False
+		if self.__numbers[0] != 0:
+			return False
+		if (self.__numbers[1] < 2010) or (self.__numbers[1] > 2100):
+			return False
+		if (self.__numbers[2] < 1) or (self.__numbers[2] > 12):
+			return False
+		if (self.__numbers[3] < 1) or (self.__numbers[3] > 31):
+			return False
+
+		# everything seems to be plausible.
+
+		return True
+	#
+
 	def __str__(self):
 		if (self.__epoch is None) or (self.__epoch == 0):
 			ret = ""

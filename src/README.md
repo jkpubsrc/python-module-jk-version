@@ -1,4 +1,4 @@
-﻿jk_version
+jk_version
 ==========
 
 Introduction
@@ -8,7 +8,7 @@ This python module provides a version class. Instances of this class may be used
 
 Information about this module can be found here:
 
-* [github.org](https://github.com/jkpubsrc/....)
+* [github.org](https://github.com/jkpubsrc/python-module-jk-version)
 * [pypi.python.org](https://pypi.python.org/pypi/jk_version)
 
 Why this module?
