@@ -16,6 +16,10 @@ import datetime
 
 class Version(object):
 
+	################################################################################################################################
+	## Constructor
+	################################################################################################################################
+
 	#
 	# Constructor
 	#
@@ -32,11 +36,11 @@ class Version(object):
 			for i in version:
 				assert isinstance(i, int)
 
-			self.__numbers = list(version)
+			self.__numbers = tuple(version)
 
 		elif isinstance(version, str):
 
-			self.__numbers = []
+			numbers = []
 			try:
 				# parse epoch if present
 
@@ -67,7 +71,11 @@ class Version(object):
 				for s in version.split("."):
 					while (len(s) > 1) and (s[0] == "0"):		# remove trailing zeros of individual version components to allow accidental specification of dates as version information
 						s = s[1:]
-					self.__numbers.append(int(s))
+					numbers.append(int(s))
+
+				# ----
+
+				self.__numbers = tuple(numbers)
 
 			except Exception:
 				raise Exception("Failed to parse version number: \"" + version + "\"")
@@ -75,6 +83,10 @@ class Version(object):
 		else:
 			raise Exception("Value of invalid type specified: " + str(type(version)))
 	#
+
+	################################################################################################################################
+	## Public Properties
+	################################################################################################################################
 
 	@property
 	def length(self) -> int:
@@ -102,6 +114,18 @@ class Version(object):
 		# everything seems to be plausible.
 
 		return True
+	#
+
+	################################################################################################################################
+	## Helper Methods
+	################################################################################################################################
+
+	################################################################################################################################
+	## Public Methods
+	################################################################################################################################
+
+	def __hash__(self):
+		return hash(self.__numbers)
 	#
 
 	def __str__(self):
