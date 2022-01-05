@@ -1,6 +1,7 @@
 
 
 
+
 import typing
 import re
 import datetime
@@ -9,9 +10,10 @@ import datetime
 
 
 
-################################################################################################################################
-## class Version
-################################################################################################################################
+
+
+
+
 
 
 class Version(object):
@@ -27,6 +29,7 @@ class Version(object):
 	#
 	def __init__(self, version:typing.Union[str,list,tuple] = "0"):
 		self.__epoch = 0
+		self.__extra = None
 
 		if isinstance(version, (list, tuple)):
 
@@ -40,44 +43,33 @@ class Version(object):
 
 		elif isinstance(version, str):
 
-			numbers = []
 			try:
-				# parse epoch if present
-
-				pColon = version.find(":")
-				if pColon == 0:
+				m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", version)
+				if not m:
 					raise Exception("Failed to parse version number: \"" + version + "\"")
-				elif pColon > 0:
-					self.__epoch = int(version[:pColon])
-					version = version[pColon + 1:]
 
-				# extract regular version number, strip additional information away
-
-				m = re.match("^[0-9\.]+", version)
-				if m:
-					version = version[:m.end()]
-					if version.endswith("."):
-						version = version[:-1]
-				else:
-					# can't parse this
-					raise Exception()
-
-				if len(version) == 0:
-					# can't parse this
-					raise Exception()
+				sEpoch = m.group("epoch")
+				sVersion = m.group("version")
+				sExtra = m.group("extra")
+				if sEpoch:
+					self.__epoch = int(sEpoch)
+				if sExtra:
+					self.__extra = sExtra
 
 				# parse regular version number
 
-				for s in version.split("."):
-					while (len(s) > 1) and (s[0] == "0"):		# remove trailing zeros of individual version components to allow accidental specification of dates as version information
-						s = s[1:]
-					numbers.append(int(s))
+				numbers = []
+				for sVPart in sVersion.split("."):
+					while (len(sVPart) > 1) and (sVPart[0] == "0"):		# remove trailing zeros of individual version components to allow accidental specification of dates as version information
+						sVPart = sVPart[1:]
+					numbers.append(int(sVPart))
 
 				# ----
 
 				self.__numbers = tuple(numbers)
 
-			except Exception:
+			except Exception as ee:
+				raise
 				raise Exception("Failed to parse version number: \"" + version + "\"")
 
 		else:
@@ -87,6 +79,16 @@ class Version(object):
 	################################################################################################################################
 	## Public Properties
 	################################################################################################################################
+
+	@property
+	def epoch(self) -> int:
+		return self.__epoch
+	#
+
+	@property
+	def extra(self) -> typing.Union[str,None]:
+		return self.__extra
+	#
 
 	@property
 	def length(self) -> int:
@@ -142,6 +144,9 @@ class Version(object):
 				ret += "."
 			ret += str(v)
 
+		if self.__extra:
+			ret += "-" + self.__extra
+
 		return ret
 	#
 
@@ -174,7 +179,7 @@ class Version(object):
 				if x != 0:
 					return x
 			return 0
-		
+
 		else:
 			raise Exception("Incompatible types: 'Version' and " + repr(type(other).__name__))
 	#
@@ -220,6 +225,14 @@ class Version(object):
 		return n != 0
 	#
 
+	def dump(self):
+		print("Version<(")
+		print("\tepoch=" + repr(self.__epoch))
+		print("\tnumbers=" + repr(self.__numbers))
+		print("\textra=" + repr(self.__extra))
+		print(")>")
+	#
+
 	@staticmethod
 	def now():
 		dt = datetime.datetime.now()
@@ -233,20 +246,3 @@ class Version(object):
 	#
 
 #
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

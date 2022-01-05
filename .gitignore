@@ -7,3 +7,4 @@ examples/__pycache__/
 .vscode
 examples/*.log
 testing/results/
+src/build/

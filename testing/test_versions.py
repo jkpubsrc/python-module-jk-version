@@ -15,6 +15,11 @@ from jk_testing import *
 
 
 @TestCase()
+def test_case_regular_0(ctx):
+	assert Version("0") == "0"
+#
+
+@TestCase()
 def test_case_regular_1(ctx):
 	assert Version("1") == "1"
 #
@@ -56,7 +61,16 @@ def test_case_regular_8(ctx):
 
 @TestCase()
 def test_case_with_epoch(ctx):
-	assert Version("2:0.2019.03.02") == "2:0.2019.3.2"
+	v1 = Version("2:0.2019.03.02")
+	assert v1 == Version("2:0.2019.3.2")
+	assert v1 == "2:0.2019.3.2"
+#
+
+@TestCase()
+def test_case_epoch_comparison(ctx):
+	assert Version("0.2019.3.2") == "0:0.2019.3.2"
+	assert Version("0.2019.3.2") < "1:0.2019.3.2"
+	assert Version("1:0.2019.3.2") < "2:0.2019.3.2"
 #
 
 @TestCase()
@@ -66,17 +80,32 @@ def test_case_stripping_other(ctx):
 
 @TestCase()
 def test_case_stripping_other_1(ctx):
-	assert Version("2:0.1.2-3ubuntu4") == "2:0.1.2"
+	v = Version("2:0.1.2-3ubuntu4")
+	assert v.epoch == 2
+	assert v.numbers == [ 0, 1, 2 ]
+	assert v.extra == "3ubuntu4"
+	assert v == "2:0.1.2"
+	assert str(v) == "2:0.1.2-3ubuntu4"
 #
 
 @TestCase()
 def test_case_stripping_other_2(ctx):
-	assert Version("2:0.1.2+3ubuntu4") == "2:0.1.2"
+	v = Version("2:0.1.2+3ubuntu4")
+	assert v.epoch == 2
+	assert v.numbers == [ 0, 1, 2 ]
+	assert v.extra == "3ubuntu4"
+	assert v == "2:0.1.2"
+	assert str(v) == "2:0.1.2-3ubuntu4"
 #
 
 @TestCase()
 def test_case_stripping_other_3(ctx):
-	assert Version("2:0.1.2~3ubuntu4") == "2:0.1.2"
+	v = Version("2:0.1.2~3ubuntu4")
+	assert v.epoch == 2
+	assert v.numbers == [ 0, 1, 2 ]
+	assert v.extra == "3ubuntu4"
+	assert v == "2:0.1.2"
+	assert str(v) == "2:0.1.2-3ubuntu4"
 #
 
 
@@ -143,7 +172,7 @@ results = testDriver.runTests([
 ])
 
 reporter = TestReporterHTML()
-reporter.report(results)
+reporter.report(results, webbrowserType="chromium")
 
 
 
