@@ -108,6 +108,16 @@ def test_case_stripping_other_3(ctx):
 	assert str(v) == "2:0.1.2-3ubuntu4"
 #
 
+@TestCase()
+def test_case_maven_snapshot(ctx):
+	v = Version("1.2.3-SNAPSHOT")
+	assert v.epoch == 0
+	assert v.numbers == [ 1, 2, 3 ]
+	assert v.extra == "SNAPSHOT"
+	assert v == "1.2.3"
+	assert str(v) == "1.2.3-SNAPSHOT"
+#
+
 
 #
 # Errors
@@ -142,6 +152,11 @@ def test_case_comparison_4(ctx):
 	assert Version("2:0.1.2") > "1:1.2.3"
 #
 
+@TestCase()
+def test_case_comparison_maven(ctx):
+	assert Version("1.2.3-SNAPSHOT") == Version("1.2.3")
+#
+
 
 
 ################################################################################################################################
@@ -164,11 +179,13 @@ results = testDriver.runTests([
 	(test_case_stripping_other_1, True),
 	(test_case_stripping_other_2, True),
 	(test_case_stripping_other_3, True),
+	(test_case_maven_snapshot, True),
 
 	(test_case_comparison_1, True),
 	(test_case_comparison_2, True),
 	(test_case_comparison_3, True),
 	(test_case_comparison_4, True),
+	(test_case_comparison_maven, True),
 ])
 
 reporter = TestReporterHTML()

@@ -27,21 +27,11 @@ class Version(object):
 	#
 	# @param		int[]|str version				The version string this object should represent
 	#
-	def __init__(self, version:typing.Union[str,list,tuple] = "0"):
+	def __init__(self, version:typing.Union[str,list,tuple,dict] = "0"):
 		self.__epoch = 0
 		self.__extra = None
 
-		if isinstance(version, (list, tuple)):
-
-			if len(version) == 0:
-				raise Exception("Invalid version number: \"" + str(version) + "\"")
-
-			for i in version:
-				assert isinstance(i, int)
-
-			self.__numbers = tuple(version)
-
-		elif isinstance(version, str):
+		if isinstance(version, str):
 
 			try:
 				m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", version)
@@ -72,8 +62,26 @@ class Version(object):
 				raise
 				raise Exception("Failed to parse version number: \"" + version + "\"")
 
+		elif isinstance(version, (list, tuple)):
+
+			if len(version) == 0:
+				raise Exception("Invalid version number: \"" + str(version) + "\"")
+
+			for i in version:
+				assert isinstance(i, int)
+
+			self.__numbers = tuple(version)
+
+		elif isinstance(version, dict):
+
+			self.__epoch = version.get("epoch", 0)
+			self.__numbers = tuple(version["numbers"])
+			self.__extra = version.get("extra", None)
+
+			self.__checkIfValid(version)
+
 		else:
-			raise Exception("Value of invalid type specified: " + str(type(version)))
+			raise Exception("Specified value is of invalid type: " + str(type(version)))
 	#
 
 	################################################################################################################################
@@ -100,6 +108,7 @@ class Version(object):
 		return list(self.__numbers)
 	#
 
+	# TODO: rename to "isDateBased"
 	@property
 	def isDateBase(self) -> bool:
 		if len(self.__numbers) < 4:
@@ -121,6 +130,22 @@ class Version(object):
 	################################################################################################################################
 	## Helper Methods
 	################################################################################################################################
+
+	def __checkIfValid(self, original):
+		if len(self.__numbers) == 0:
+			raise Exception("Invalid version number: " + repr(original))
+
+		for i in self.__numbers:
+			if not isinstance(i, int):
+				raise Exception("Invalid version number: " + repr(original))
+
+		if self.__extra is not None:
+			if not isinstance(self.__extra, str):
+				raise Exception("Invalid version number: " + repr(original))
+
+		if not isinstance(self.__epoch, int):
+			raise Exception("Invalid version number: " + repr(original))
+	#
 
 	################################################################################################################################
 	## Public Methods
@@ -223,6 +248,14 @@ class Version(object):
 	def __ne__(self, other):
 		n = self.compareTo(other)
 		return n != 0
+	#
+
+	def toJSON(self) -> dict:
+		return {
+			"epoch": self.__epoch,
+			"numbers": self.__numbers,
+			"extra": self.__extra,
+		}
 	#
 
 	def dump(self):

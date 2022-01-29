@@ -36,7 +36,7 @@ setup(
 	packages = [
 		"jk_version",
 	],
-	version = "0.2022.1.6",
+	version = "0.2022.1.29",
 	zip_safe = False,
 	long_description = readme(),
 	long_description_content_type="text/markdown",

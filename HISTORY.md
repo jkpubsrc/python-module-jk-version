@@ -5,3 +5,9 @@
 * 2022-01-06
 	* Improved parsing
 	* Support storing additional extra information
+
+* 2022-01-29
+	* Refactoring
+	* Added support for JSON conversion
+	* Added more unit tests
+
