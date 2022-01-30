@@ -8,6 +8,7 @@
 
 * 2022-01-29
 	* Refactoring
+	* Added: constraints
 	* Added support for JSON conversion
 	* Added more unit tests
 

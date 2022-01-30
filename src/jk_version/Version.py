@@ -1,6 +1,6 @@
 
 
-
+from __future__ import annotations
 
 import typing
 import re
@@ -27,9 +27,9 @@ class Version(object):
 	#
 	# @param		int[]|str version				The version string this object should represent
 	#
-	def __init__(self, version:typing.Union[str,list,tuple,dict] = "0"):
-		self.__epoch = 0
-		self.__extra = None
+	def __init__(self, version:typing.Union[str,list,tuple,dict] = "0", *, _epoch:int = 0, _extra:str = None):
+		self.__epoch = _epoch
+		self.__extra = _extra
 
 		if isinstance(version, str):
 
@@ -150,6 +150,10 @@ class Version(object):
 	################################################################################################################################
 	## Public Methods
 	################################################################################################################################
+
+	def clone(self) -> Version:
+		return Version(self.__numbers, _epoch=self.__epoch, _extra=self.__extra)
+	#
 
 	def __hash__(self):
 		return hash(self.__numbers)

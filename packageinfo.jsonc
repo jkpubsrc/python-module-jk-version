@@ -21,7 +21,7 @@
 		"license": "Apache2",
 		"name": "jk_version",
 		"packageClass": "python-module",
-		"version": "0.2022.1.29"
+		"version": "0.2022.1.30"
 	},
 	"repositories": [
 		{
@@ -39,7 +39,7 @@
 	"requirements": {
 		"python_packages": [],
 		"python_packages_dev": [
-			"jk_testing"
+			"jk_testing",
 		],
 		"system_apt_packages": []
 	},
@@ -47,7 +47,7 @@
 		"extra_binary_files": [],
 		"extra_data_files": [],
 		"packages": [
-			"jk_version"
+			"jk_version",
 		]
 	}
 }
