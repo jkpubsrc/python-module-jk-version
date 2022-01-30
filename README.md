@@ -88,7 +88,7 @@ Compatible Modules
 -------------------
 
 Version number parsers:
-* [PHP `composer` versipn parser](https://github.com/jkpubsrc/python-module-jk-php-version-parser)
+* [PHP `composer` version parser](https://github.com/jkpubsrc/python-module-jk-php-version-parser)
 
 Contact Information
 -------------------
