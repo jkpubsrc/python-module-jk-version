@@ -11,4 +11,5 @@
 	* Added: constraints
 	* Added support for JSON conversion
 	* Added more unit tests
+	* Added: String conversion of constraints
 

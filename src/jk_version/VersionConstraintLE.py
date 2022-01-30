@@ -49,6 +49,14 @@ class VersionConstraintLE(BaseVersionConstraint):
 		return [ "<=", str(self.__v) ]
 	#
 
+	def __str__(self):
+		return "<={}".format(self.__v)
+	#
+
+	def __repr__(self):
+		return "<={}".format(self.__v)
+	#
+
 #
 
 

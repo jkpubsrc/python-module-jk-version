@@ -71,6 +71,14 @@ class VersionConstraintOR(BaseVersionConstraint):
 			return VersionConstraintOR(*ret)
 	#
 
+	def __str__(self):
+		return "(" + (" || ".join([ str(x) for x in self.__elements ])).strip() + ")"
+	#
+
+	def __repr__(self):
+		return "(" + (" || ".join([ str(x) for x in self.__elements ])).strip() + ")"
+	#
+
 #
 
 
