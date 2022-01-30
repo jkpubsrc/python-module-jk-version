@@ -18,4 +18,9 @@ from .VersionConstraintEQ import VersionConstraintEQ
 from .VersionConstraintOR import VersionConstraintOR
 from .VersionConstraintAND import VersionConstraintAND
 
+from ._ConstraintDeserializer import deserializeConstraint
+
+
+
+
 

@@ -13,3 +13,6 @@
 	* Added more unit tests
 	* Added: String conversion of constraints
 
+* 2022-01-30
+	* Added: Deserialization of constraints
+
