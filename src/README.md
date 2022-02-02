@@ -14,12 +14,19 @@ Information about this module can be found here:
 Why this module?
 ----------------
 
-...
+To manage data and software packages in a reasonable way versioning is important. For this you need to represent versions in computer memory.
+This is what this module does: Provide version objects so that you can work with version information programmatically.
+That's what this module has been written for.
 
-Limitations of this module
+Functionality
 --------------------------
 
-...
+This module provides:
+
+* `Version` - An object to represent version numbers in memory. (Parsing of version numbers is provided by this object as well.)
+* Constraint classes that can be used to check versions:
+	* `BaseVersionConstraint` - the abstract base class for all constraints
+	* A set of concrete constraint classes: `VersionConstraint[GE|GT|LE|LT|NE|EQ|AND|OR]`
 
 How to use this module
 ----------------------
@@ -44,9 +51,9 @@ Version numbers can either be specified as lists of integers or as a string. Exa
 
 For compatibility reasons the version number parser is designed to accept the following schema:
 
-*[ epoch ":" ] version_data*
+*[ epoch ":" ] version_data [ "-" extra ]*
 
-Where *epoch* is optional and - if present - must be an integer, and *version_data* is a regular version string consisting of decimal numbers separated by full stops.
+Where *epoch* is optional and - if present - must be an integer, and *version_data* is a regular version string consisting of decimal numbers separated by points.
 
 Examples for valid version numbers:
 
@@ -55,6 +62,13 @@ Examples for valid version numbers:
 * `0.1.2`
 * `2020.12.24`
 * `2:0.1.2`
+
+An extra identifier is supported:
+
+* `0.1.2-dev`
+* `1.2.3-stable`
+* `2.3.4-SNAPSHOT`
+* `3.4.5-beta2`
 
 ### Comparing version numbers
 
@@ -66,7 +80,15 @@ v2 = Version("0.2.0")
 print(v2 > v1)
 ```
 
-This will print: `True`
+This will result in: `True`
+
+**NOTE:** Please note that extra identifiers are stored in version objects but are ignored otherwise. If you require to compare two versions and this comparison must take this extra identifier into account you need to implement your own comparison function for this purpose. This is because of the fact that there is no general convention how this extra information can be processed.
+
+Compatible Modules
+-------------------
+
+Version number parsers:
+* [PHP `composer` version parser](https://github.com/jkpubsrc/python-module-jk-php-version-parser)
 
 Contact Information
 -------------------
@@ -75,7 +97,7 @@ This work is Open Source. This enables you to use this work for free.
 
 Please have in mind this also enables you to contribute. We, the subspecies of software developers, can create great things. But the more collaborate, the more fantastic these things can become. Therefore Feel free to contact the author(s) listed below, either for giving feedback, providing comments, hints, indicate possible collaborations, ideas, improvements. Or maybe for "only" reporting some bugs:
 
-* Jürgen Knauth: jknauth@uni-goettingen.de, pubsrc@binary-overflow.de
+* Jürgen Knauth: pubsrc@binary-overflow.de
 
 License
 -------

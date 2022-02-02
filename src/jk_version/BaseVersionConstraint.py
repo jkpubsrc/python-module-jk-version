@@ -1,6 +1,6 @@
 
 
-from __future__ import annotations
+# from __future__ import annotations
 
 import re
 import os
@@ -37,7 +37,13 @@ class BaseVersionConstraint(object):
 		raise NotImplementedError()
 	#
 
-	def simplify(self) -> BaseVersionConstraint:
+	#
+	# The default implementation will return itself.
+	# Subclasses may overwrite this method with their own simplification logic.
+	#
+	# @returns		BaseVersionConstraint		Returns a simplified version of this object.
+	#
+	def simplify(self):		# -> BaseVersionConstraint:
 		return self
 	#
 

@@ -1,7 +1,7 @@
 ﻿
 
 
-__version__ = "0.2022.1.30"
+__version__ = "0.2022.2.2"
 
 
 from .Version import Version
@@ -19,7 +19,6 @@ from .VersionConstraintOR import VersionConstraintOR
 from .VersionConstraintAND import VersionConstraintAND
 
 from ._ConstraintDeserializer import deserializeConstraint
-
 
 
 

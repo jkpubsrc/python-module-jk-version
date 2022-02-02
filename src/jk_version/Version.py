@@ -1,6 +1,6 @@
 
 
-from __future__ import annotations
+# from __future__ import annotations
 
 import typing
 import re
@@ -151,7 +151,7 @@ class Version(object):
 	## Public Methods
 	################################################################################################################################
 
-	def clone(self) -> Version:
+	def clone(self):	# -> Version:
 		return Version(self.__numbers, _epoch=self.__epoch, _extra=self.__extra)
 	#
 
