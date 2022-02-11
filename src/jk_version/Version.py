@@ -59,7 +59,6 @@ class Version(object):
 				self.__numbers = tuple(numbers)
 
 			except Exception as ee:
-				raise
 				raise Exception("Failed to parse version number: \"" + version + "\"")
 
 		elif isinstance(version, (list, tuple)):

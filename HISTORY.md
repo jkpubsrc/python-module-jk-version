@@ -19,3 +19,6 @@
 * 2022-02-02
 	* Removed forward references because __future__ conflicts with runtime reflection
 
+* 2022-02-11
+	* Corrected unnecessary raise statement
+
