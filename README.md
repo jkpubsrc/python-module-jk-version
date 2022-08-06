@@ -47,6 +47,11 @@ Version numbers can either be specified as lists of integers or as a string. Exa
 * `Version(( 1, 7, 51 ))`
 * `Version("1.7.51")`
 
+Additionally you can use the following static method:
+
+* `Version.parseFromStr("1.7.51")`
+* `Version.parseFromStr("1.7.51", bStrict=True)`
+
 ### Version numbering schema
 
 For compatibility reasons the version number parser is designed to accept the following schema:
@@ -60,15 +65,41 @@ Examples for valid version numbers:
 * `0`
 * `0.1`
 * `0.1.2`
+* `1`
+* `1.7`
 * `2020.12.24`
+* `0.2022.8.6`
+* `0.2022.8.6.1`
+
+Parsing epoch information is supported:
+
 * `2:0.1.2`
 
-An extra identifier is supported:
+And an extra identifier is supported as well:
 
+* `1.7-alpha`
 * `0.1.2-dev`
 * `1.2.3-stable`
 * `2.3.4-SNAPSHOT`
 * `3.4.5-beta2`
+* `0.2022.8.6.2-rc1`
+
+In non-strict mode (= default) parsing will handle strings such as this as well:
+
+* `3.4.5.beta2`
+
+### Generating version numbers
+
+The `Version` class supports the generation of date based version numbers. Example:
+
+```python
+v = Version.now()
+print(v)
+```
+
+This would build a version number such as this:
+
+* `0.2022.8.6`
 
 ### Comparing version numbers
 

@@ -28,38 +28,23 @@ class Version(object):
 	# @param		int[]|str version				The version string this object should represent
 	#
 	def __init__(self, version:typing.Union[str,list,tuple,dict] = "0", *, _epoch:int = 0, _extra:str = None):
+		assert isinstance(_epoch, int)
+		if _extra is not None:
+			assert isinstance(_extra, str)
+
 		self.__epoch = _epoch
 		self.__extra = _extra
 
 		if isinstance(version, str):
 
-			try:
-				m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", version)
-				if not m:
-					raise Exception("Failed to parse version number: \"" + version + "\"")
-
-				sEpoch = m.group("epoch")
-				sVersion = m.group("version")
-				sExtra = m.group("extra")
-				if sEpoch:
-					self.__epoch = int(sEpoch)
-				if sExtra:
-					self.__extra = sExtra
-
-				# parse regular version number
-
-				numbers = []
-				for sVPart in sVersion.split("."):
-					while (len(sVPart) > 1) and (sVPart[0] == "0"):		# remove trailing zeros of individual version components to allow accidental specification of dates as version information
-						sVPart = sVPart[1:]
-					numbers.append(int(sVPart))
-
-				# ----
-
-				self.__numbers = tuple(numbers)
-
-			except Exception as ee:
-				raise Exception("Failed to parse version number: \"" + version + "\"")
+			self.__numbers, self.__epoch, self.__extra = Version.__parseFromStr(version, False)
+			if self.__numbers is None:
+				raise Exception("Failed to parse version string: \"" + version + "\"")
+			for i in self.__numbers:
+				assert isinstance(i, int)
+			assert isinstance(self.__epoch, int)
+			if _extra is not None:
+				assert isinstance(_extra, str)
 
 		elif isinstance(version, (list, tuple)):
 
@@ -146,6 +131,45 @@ class Version(object):
 			raise Exception("Invalid version number: " + repr(original))
 	#
 
+	@staticmethod
+	def __parseFromStr(text:str, bStrict:bool = False) -> tuple:
+		try:
+			m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", text)
+			if not bStrict:
+				if not m:
+					m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+\.](?P<extra>[a-zA-Z][a-zA-Z0-9]*))?$", text)
+			if not m:
+				return None, None, None
+
+			_epoch = 0
+			_extra = None
+
+			sEpoch = m.group("epoch")
+			sVersion = m.group("version")
+			sExtra = m.group("extra")
+			if sEpoch:
+				_epoch = int(sEpoch)
+			if sExtra:
+				_extra = sExtra
+
+			# parse regular version number
+
+			numbers = []
+			for sVPart in sVersion.split("."):
+				while (len(sVPart) > 1) and (sVPart[0] == "0"):		# remove trailing zeros of individual version components to allow accidental specification of dates as version information
+					sVPart = sVPart[1:]
+				numbers.append(int(sVPart))
+
+			# ----
+
+			_numbers = tuple(numbers)
+			# print(">>>>", repr(text), repr(_numbers), repr(_epoch), repr(_extra))
+			return _numbers, _epoch, _extra
+
+		except Exception as ee:
+			return None, None, None
+	#
+
 	################################################################################################################################
 	## Public Methods
 	################################################################################################################################
@@ -187,19 +211,22 @@ class Version(object):
 			other = Version(other)
 
 		if isinstance(other, Version):
-			aNumbers = [ self.__epoch ] + list(self.__numbers)
-			bNumbers = [ other.__epoch ] + list(other.__numbers)
+			aNumbers = [ self.__epoch ]
+			aNumbers.extend(self.__numbers)
+			bNumbers = [ other.__epoch ]
+			bNumbers.extend(other.__numbers)
 
-			length = len(bNumbers)
-			if len(aNumbers) < length:
-				while len(aNumbers) < length:
-					aNumbers.append(0)
-			else:
-				length = len(aNumbers)
-				while len(bNumbers) < length:
-					bNumbers.append(0)
+			maxLength = max(len(aNumbers), len(bNumbers))
 
-			for i in range(0, length):
+			while len(aNumbers) < maxLength:
+				aNumbers.append(0)
+			while len(bNumbers) < maxLength:
+				bNumbers.append(0)
+
+			# print("aNumbers", aNumbers)
+			# print("bNumbers", bNumbers)
+
+			for i in range(0, maxLength):
 				na = aNumbers[i]
 				nb = bNumbers[i]
 				x = (na > nb) - (na < nb)
@@ -279,6 +306,15 @@ class Version(object):
 	def fromTimeStamp(t):
 		dt = datetime.datetime.fromtimestamp(t)
 		return Version([ 0, dt.year, dt.month, dt.day ])
+	#
+
+	@staticmethod
+	def parseFromStr(text:str, bStrict:bool = False):
+		_numbers, _epoch, _extra = Version.__parseFromStr(text, bStrict)
+		if _numbers is None:
+			raise Exception("Failed to parse version string: \"" + text + "\"")
+
+		return Version(_numbers, _epoch=_epoch, _extra=_extra)
 	#
 
 #

@@ -88,13 +88,14 @@ def test_AND(ctx):
 testDriver = TestDriver()
 
 results = testDriver.runTests([
-	(test_0, True),
-	(test_OR, True),
-	(test_AND, True),
+	test_0,
+	test_OR,
+	test_AND,
 ])
 
-reporter = TestReporterHTML()
-reporter.report(results, webbrowserType="chromium")
+#reporter = TestReporterHTML()
+#reporter.report(results)
+#reporter.report(results, webbrowserType="chromium")
 
 
 

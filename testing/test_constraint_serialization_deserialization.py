@@ -65,6 +65,7 @@ results = testDriver.runTests([
 ])
 
 #reporter = TestReporterHTML()
+#reporter.report(results)
 #reporter.report(results, webbrowserType="chromium")
 
 

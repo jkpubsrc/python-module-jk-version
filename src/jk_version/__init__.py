@@ -1,7 +1,9 @@
-﻿
 
 
-__version__ = "0.2022.2.11"
+
+__author__ = "Jürgen Knauth"
+__version__ = "0.2022.8.6"
+
 
 
 from .Version import Version

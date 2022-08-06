@@ -8,3 +8,5 @@ examples/__pycache__/
 examples/*.log
 testing/results/
 src/build/
+*.old
+*.bak

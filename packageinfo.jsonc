@@ -1,5 +1,4 @@
 {
-	"documentation": [],
 	"magic": {
 		"magic": "packageinfo",
 		"version": 2
@@ -21,33 +20,22 @@
 		"license": "Apache2",
 		"name": "jk_version",
 		"packageClass": "python-module",
-		"version": "0.2022.2.11"
+		"version": "0.2022.8.6"
 	},
-	"repositories": [
-		{
-			"devon_publish": true,
-			"project": "python-module-jk-version",
-			"type": "github",
-			"user": "jkpubsrc"
-		},
-		{
-			"devon_publish": true,
-			"project": "jk_version",
-			"type": "pypi"
-		}
-	],
 	"requirements": {
+		"htmlcssjs_packages": [],
 		"python_packages": [],
 		"python_packages_dev": [
-			"jk_testing",
+			"jk_testing"
 		],
+		"python_packages_recommended": [],
 		"system_apt_packages": []
 	},
 	"source": {
 		"extra_binary_files": [],
 		"extra_data_files": [],
 		"packages": [
-			"jk_version",
+			"jk_version"
 		]
 	}
 }

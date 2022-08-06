@@ -24,7 +24,7 @@ setup(
 		"Programming Language :: Python :: 3",
 	],
 	description = "This python module provides a version class. Instances of this class may be used in representing and version numbers and compare them.",
-	include_package_data = False,
+	include_package_data = True,
 	install_requires = [
 	],
 	keywords = [
@@ -33,11 +33,17 @@ setup(
 	],
 	license = "Apache2",
 	name = "jk_version",
+	package_data = {
+		"": [
+		],
+	},
 	packages = [
 		"jk_version",
 	],
-	version = "0.2022.2.11",
+	scripts = [
+	],
+	version = '0.2022.8.6',
 	zip_safe = False,
 	long_description = readme(),
-	long_description_content_type="text/markdown",
+	long_description_content_type = "text/markdown",
 )
