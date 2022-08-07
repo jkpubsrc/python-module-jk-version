@@ -20,7 +20,7 @@
 		"license": "Apache2",
 		"name": "jk_version",
 		"packageClass": "python-module",
-		"version": "0.2022.8.6"
+		"version": "0.2022.8.7"
 	},
 	"requirements": {
 		"htmlcssjs_packages": [],

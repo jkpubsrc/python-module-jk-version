@@ -66,6 +66,8 @@ class Version(object):
 
 		else:
 			raise Exception("Specified value is of invalid type: " + str(type(version)))
+
+		self.__hashCode = self.__str__().__hash__()
 	#
 
 	################################################################################################################################
@@ -278,6 +280,10 @@ class Version(object):
 	def __ne__(self, other):
 		n = self.compareTo(other)
 		return n != 0
+	#
+
+	def __hash__(self) -> int:
+		return self.__hashCode
 	#
 
 	def toJSON(self) -> dict:

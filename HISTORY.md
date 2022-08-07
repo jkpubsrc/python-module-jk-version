@@ -22,9 +22,12 @@
 * 2022-02-11
 	* Corrected unnecessary raise statement
 
-* 2022-07-06
+* 2022-08-06
 	* Redesign: Parsing
 	* Added: Additional kind of version specification
 	* Added: Additional unit tests
 	* Added: More documentation
+
+* 2022-08-07
+	* Added: Objects of Version are hashable now
 
