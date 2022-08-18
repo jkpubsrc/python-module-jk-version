@@ -31,3 +31,6 @@
 * 2022-08-07
 	* Added: Objects of Version are hashable now
 
+* 2022-08-18
+	* Removed: Unnecessary dependencies
+
