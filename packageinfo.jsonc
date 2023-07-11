@@ -1,7 +1,7 @@
 {
 	"magic": {
 		"magic": "packageinfo",
-		"version": 2
+		"version": 3
 	},
 	"meta": {
 		"authors": [
@@ -20,7 +20,8 @@
 		"license": "Apache2",
 		"name": "jk_version",
 		"packageClass": "python-module",
-		"version": "0.2022.8.18"
+		"startDevYear": 2020,
+		"version": "0.2023.7.11"
 	},
 	"requirements": {
 		"htmlcssjs_packages": [],

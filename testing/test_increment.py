@@ -9,11 +9,11 @@ from jk_version import *
 
 
 v = Version.now()
-assert v.isDateBase
+assert v.isDateBased
 print("v:", v)
 
 v2 = Version.now()
-assert v2.isDateBase
+assert v2.isDateBased
 print("v2:", v2)
 
 
@@ -21,7 +21,7 @@ vnumbers = v.numbers
 print("v:", vnumbers)
 
 v3 = Version(vnumbers + [ 1 ])
-assert v3.isDateBase
+assert v3.isDateBased
 print("v3:", v3)
 
 assert v3 > v

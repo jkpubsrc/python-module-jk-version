@@ -94,9 +94,14 @@ class Version(object):
 		return list(self.__numbers)
 	#
 
-	# TODO: rename to "isDateBased"
+	# Deprecated, but still present for compatibility reasons
 	@property
 	def isDateBase(self) -> bool:
+		return self.isDateBased
+	#
+
+	@property
+	def isDateBased(self) -> bool:
 		if len(self.__numbers) < 4:
 			return False
 		if self.__numbers[0] != 0:
@@ -139,7 +144,7 @@ class Version(object):
 			m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", text)
 			if not bStrict:
 				if not m:
-					m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+\.](?P<extra>[a-zA-Z][a-zA-Z0-9]*))?$", text)
+					m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+\.]?(?P<extra>[a-zA-Z][a-zA-Z0-9]*))?$", text)
 			if not m:
 				return None, None, None
 

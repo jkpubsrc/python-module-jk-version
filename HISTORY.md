@@ -34,3 +34,6 @@
 * 2022-08-18
 	* Removed: Unnecessary dependencies
 
+* 2023-07-11
+	* Improved: Property isDateBased
+
