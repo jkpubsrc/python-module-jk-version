@@ -42,7 +42,7 @@ setup(
 	],
 	scripts = [
 	],
-	version = "0.2023.7.11",
+	version = "0.2023.9.11",
 	zip_safe = False,
 	long_description = readme(),
 	long_description_content_type = "text/markdown",

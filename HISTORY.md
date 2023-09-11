@@ -37,3 +37,6 @@
 * 2023-07-11
 	* Improved: Property isDateBased
 
+* 2023-09-11
+	* Improved: Verion parsing
+

@@ -142,9 +142,12 @@ class Version(object):
 	def __parseFromStr(text:str, bStrict:bool = False) -> tuple:
 		try:
 			m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", text)
-			if not bStrict:
-				if not m:
-					m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+\.]?(?P<extra>[a-zA-Z][a-zA-Z0-9]*))?$", text)
+			if not m:
+				if not bStrict:
+					m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+\.](?P<extra>[a-zA-Z][a-zA-Z0-9\.]*))?$", text)
+			if not m:
+				if not bStrict:
+					m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+]?(?P<extra>[a-zA-Z][a-zA-Z0-9\.]*))?$", text)
 			if not m:
 				return None, None, None
 
