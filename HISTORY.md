@@ -40,3 +40,6 @@
 * 2023-09-11
 	* Improved: Verion parsing
 
+* 2024-07-24
+	* Migrated to pyproject.toml
+

@@ -90,7 +90,7 @@ class Version(object):
 	#
 
 	@property
-	def numbers(self) -> list:
+	def numbers(self) -> typing.List[int]:
 		return list(self.__numbers)
 	#
 

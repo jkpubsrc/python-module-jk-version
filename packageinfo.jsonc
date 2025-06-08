@@ -21,7 +21,7 @@
 		"name": "jk_version",
 		"packageClass": "python-module",
 		"startDevYear": 2020,
-		"version": "0.2023.9.11"
+		"version": "0.2024.7.24"
 	},
 	"requirements": {
 		"htmlcssjs_packages": [],
