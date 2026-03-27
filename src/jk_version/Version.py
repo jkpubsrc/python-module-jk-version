@@ -1,7 +1,5 @@
 
 
-# from __future__ import annotations
-
 import typing
 import re
 import datetime
@@ -11,10 +9,7 @@ import datetime
 
 
 
-
-
-
-
+Version = typing.NewType("Version", object)
 
 class Version(object):
 
@@ -139,7 +134,7 @@ class Version(object):
 	#
 
 	@staticmethod
-	def __parseFromStr(text:str, bStrict:bool = False) -> tuple:
+	def __parseFromStr(text:str, bStrict:bool = False) -> tuple[tuple[int,...]|None,int|None,str|None]:
 		try:
 			m = re.match(r"^((?P<epoch>[0-9]+):)?(?P<version>[0-9\.]+)([\-~\+](?P<extra>.+))?$", text)
 			if not m:
@@ -184,7 +179,7 @@ class Version(object):
 	## Public Methods
 	################################################################################################################################
 
-	def clone(self):	# -> Version:
+	def clone(self) -> Version:
 		return Version(self.__numbers, _epoch=self.__epoch, _extra=self.__extra)
 	#
 
@@ -216,7 +211,7 @@ class Version(object):
 		return self.__str__()
 	#
 
-	def compareTo(self, other):
+	def compareTo(self, other, *, bIncludeExtra:bool = True) -> int:
 		if isinstance(other, str):
 			other = Version(other)
 
@@ -243,7 +238,25 @@ class Version(object):
 				# print("> " + str(na) + "  " + str(nb) + "  " + str(x))
 				if x != 0:
 					return x
-			return 0
+
+			if bIncludeExtra:
+				if self.extra:
+					if other.extra:
+						if self.extra < other.extra:
+							return -1
+						elif self.extra == other.extra:
+							return 0
+						else:
+							return 1
+					else:
+						return -1
+				else:
+					if other.extra:
+						return 1
+					else:
+						return 0
+			else:
+				return 0
 
 		else:
 			raise Exception("Incompatible types: 'Version' and " + repr(type(other).__name__))

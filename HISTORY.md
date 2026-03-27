@@ -43,3 +43,6 @@
 * 2024-07-24
 	* Migrated to pyproject.toml
 
+* 2026-03-27
+	* Improved: Comparison now includes extra field
+
