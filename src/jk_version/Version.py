@@ -113,6 +113,34 @@ class Version(object):
 		return True
 	#
 
+	@property
+	def isAlpha(self) -> bool:
+		if self.extra and self.extra.startswith("alpha"):
+			return True
+		return False
+	#
+
+	@property
+	def isBeta(self) -> bool:
+		if self.extra and self.extra.startswith("beta"):
+			return True
+		return False
+	#
+
+	@property
+	def isReleaseCandidate(self) -> bool:
+		if self.extra and self.extra.startswith("rc"):
+			return True
+		return False
+	#
+
+	@property
+	def isMilestone(self) -> bool:
+		if self.extra and self.extra.startswith("m"):
+			return True
+		return False
+	#
+
 	################################################################################################################################
 	## Helper Methods
 	################################################################################################################################

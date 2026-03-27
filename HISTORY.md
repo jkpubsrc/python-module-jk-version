@@ -45,4 +45,5 @@
 
 * 2026-03-27
 	* Improved: Comparison now includes extra field
+	* Added: Convenience properties
 
